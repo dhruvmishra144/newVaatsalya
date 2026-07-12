@@ -156,7 +156,7 @@ export default function HomePage({
                 
                 <div className="relative bg-[#FAF5EB] p-3 rounded-3xl border border-amber-900/10 shadow-xl overflow-hidden group">
                   <img 
-                    src="/src/assets/images/vaatsalya.png" 
+                    src="/assets/images/vaatsalya.png" 
                     alt="Vaatsalya Specialty Homestyle Foods Header Banner" 
                     className="rounded-2xl w-full object-cover aspect-4/3 sm:aspect-16/10 lg:aspect-4/3 select-none group-hover:scale-[1.015] transition-all duration-700"
                     referrerPolicy="no-referrer"
