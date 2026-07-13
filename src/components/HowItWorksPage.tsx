@@ -48,7 +48,7 @@ export default function HowItWorksPage() {
       title: "Complete Flavor Restore",
       subtitle: "Unzip, fluff & savor",
       emoji: "😋",
-      description: "At 5 minutes, unzip the bag. The Basmati rice has expanded to 3x its dry size, releasing standard homestyle aromas of cardamoms, fried cumin, and fresh turmeric. Fresh homestyle food is ready to eat!",
+      description: "At 5 minutes, unzip the bag. The Basmati grains have expanded to their original cooked volume, releasing aromatic molecules of cardamom, roasted cumin, and cold-pressed turmeric. A five-star dining experience is instantly restored and ready.",
       color: "bg-emerald-500 text-white border-emerald-500",
       accentColor: "#10B981"
     }
@@ -82,7 +82,7 @@ export default function HowItWorksPage() {
       {/* 1. HEADER SECTION */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <span className="text-[10px] text-[#083765]/80 uppercase tracking-widest font-black block">Interactive Laboratory Simulator</span>
-        <h1 className="text-4xl font-serif font-black text-[#083765]">How water restores mothers' love</h1>
+        <h1 className="text-4xl font-serif font-black text-[#083765]">Precision Hydro-Restoration Science</h1>
         <p className="text-sm font-semibold text-slate-500">
           Unlock the advanced physical science of low-temperature vacuum dehydration. Use the controller below to play or click any step to see state transitions!
         </p>

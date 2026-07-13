@@ -5,31 +5,31 @@ import { Star, Award, CheckCircle } from 'lucide-react';
 export default function StoryPage() {
   const storyMilestones = [
     {
-      title: "1. Premium Sourcing Only",
-      subtitle: "The building blocks of taste",
+      title: "1. Artisanal Ingredient Sourcing",
+      subtitle: "Sourced at peak maturity",
       emoji: "🌾",
-      desc: "We exclusively source long-grain fragrant Basmati, high-protein Moong lentils, hand-milled turmeric, and pure cow A2 Desi Ghee directly from organic family farm cooperatives. No refined white sugars or highly-processed vegetable oils are ever allowed in our kitchen.",
+      desc: "We source exclusively from certified organic family cooperatives: long-grain fragrant Basmati, high-protein Moong lentils, hand-milled raw turmeric, and pure A2 Desi Ghee. Zero refined oils, chemical additives, or artificial flavor enhancers enter our preparation space.",
       image: "https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?w=400&auto=format&fit=crop&q=80"
     },
     {
-      title: "2. Handcrafted by Mothers",
-      subtitle: "The lineage of love",
+      title: "2. Master Culinary Handcraft",
+      subtitle: "Preserving heritage recipes",
       emoji: "👩‍🍳",
-      desc: "Our recipes are curated and slow-cooked in small, meticulously hygienic batches by traditional Indian mothers/homemakers. They roast the grains in clay-stove settings, tempering spices precisely to capture that authentic, comforting homestyle flavor.",
+      desc: "Each recipe is prepared in small, micro-controlled batches by culinary homemakers preserving deep regional heritage. Slowly roasted on low-ember surfaces and tempered with precision, we capture rich, complex spice signatures without high-temperature degradation.",
       image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&auto=format&fit=crop&q=80"
     },
     {
-      title: "3. Low-Temp Dehydration",
-      subtitle: "Preserving without chemicals",
+      title: "3. Sub-Zero Dehydration Technology",
+      subtitle: "Locks in 98% micronutrients",
       emoji: "💨",
-      desc: "Immediately after cooking, the food enters our low-temperature vacuum chamber. We gently evaporate water moisture at sub-zero vacuum boiling points. This locks 98% of natural minerals, fibers, and vitamins in a static state without using chemical stabilizers.",
+      desc: "Immediately post-cooking, the dishes enter low-temperature vacuum chambers. By evaporating moisture at high-vacuum points, we lock 98% of natural minerals, fibers, and volatile spice matrices into a shelf-stable static state. No preservatives, stabilizers, or MSG are used.",
       image: "https://images.unsplash.com/photo-1547306733-5c3c0ca662f5?w=400&auto=format&fit=crop&q=80"
     },
     {
-      title: "4. Travel Anywhere Comfort",
-      subtitle: "Ghar ka Khana Globally",
+      title: "4. Global Travel Architecture",
+      subtitle: "Ready in 5 Minutes",
       emoji: "🎒",
-      desc: "Packed in sturdy nitrogen-flushed stand-up pouches, the food reaches hot-plate camping trails, busy corporate boardrooms, or foreign hostel rooms. Just add boiling water to rehydrate the home-cooked taste you love.",
+      desc: "Sealed in nitrogen-flushed, 4-layer thermal pouches, our gourmet meals are ready for camper transit, international travel, or premium office lunches. Just add boiling water to rehydrate the original rich texture in minutes.",
       image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&auto=format&fit=crop&q=80"
     }
   ];
@@ -39,10 +39,10 @@ export default function StoryPage() {
       
       {/* 1. HERO STORY TITLE */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <span className="text-[10px] text-navy/80 uppercase tracking-widest font-black block">Our Heritage & Integrity</span>
-        <h1 className="text-4xl font-serif font-black text-navy">Moms' Cooking • Scientific Preservation</h1>
+        <span className="text-[10px] text-navy/80 uppercase tracking-widest font-black block">Culinary Heritage & Food Science</span>
+        <h1 className="text-4xl font-serif font-black text-navy">Heritage Gastronomy • Scientific Preservation</h1>
         <p className="text-sm font-semibold text-slate-500">
-          Learn how we fuse ancient culinary wisdom with advanced zero-chemical dehydration science to pack authentic homestyle Indian nutrition in featherlight bags.
+          Discover how we fuse legacy culinary craft with sub-zero vacuum dehydration technology to deliver lightweight, clean-label gourmet nourishment.
         </p>
       </div>
 
@@ -101,13 +101,13 @@ export default function StoryPage() {
             <Star className="w-4 h-4 fill-amber-500" />
           </div>
           <h3 className="text-xl font-serif font-black text-navy">
-            "We cook just like we feed our children."
+            "Purity at the heart of heritage cooking."
           </h3>
           <p className="text-xs text-slate-600 font-semibold leading-relaxed">
-            Our kitchens do not use raw powder pre-mixes or fast-food techniques. We roast raw moong dal flour in Desi Ghee under direct monitoring, so the Sheera sweetness dates smell fresh and tender. Safety and clean, nutritive value is our primary guarantee.
+            We do not believe in synthetic shortcuts. Our team slow-roasts raw moong dal in pure A2 Desi Ghee under strict thermal standards, sweetening naturally with powdered organic dates. Clean-label integrity and premium nourishment are our absolute commitments.
           </p>
           <span className="text-[10px] uppercase font-black tracking-widest text-navy block">
-            — Smt. Vidya Kulkarni, Quality Superintendent & Traditional Cook
+            — Smt. Vidya Kulkarni, Quality Assurance & Culinary Custodian
           </span>
         </div>
         <span className="p-4 bg-amber-100 text-navy rounded-full shrink-0">

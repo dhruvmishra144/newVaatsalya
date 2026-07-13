@@ -356,18 +356,18 @@ export const FAQS_DATA: FAQ[] = [
   },
   {
     question: "Is it really as simple as just adding hot water?",
-    answer: "Yes, absolutely! Each bag is a self-standing cooking pouch. You open the bag, remove the oxygen-absorber sachet, pour boiling water up to the marked water line on the inside, stir well, zip the heat-lock zipper shut, and wait 3-5 minutes. The food rehydrates back to its original soft, fragrant, home-cooked texture."
+    answer: "Yes, absolutely! Each bag is a self-standing cooking pouch. You open the bag, remove the oxygen-absorber sachet, pour boiling water up to the marked water line on the inside, stir well, zip the heat-lock zipper shut, and wait 3-5 minutes. The food rehydrates back to its original soft, fragrant, freshly prepared texture."
   },
   {
     question: "Can I prepare these in a microwave or hotel kettle?",
     answer: "Yes. All you need is boiling water. You can boil water using any standard hotel room electric tea kettle, a microwave, or a simple thermos. If boiling water isn't available, you can add cold water and microwave the self-standing pouch (open zipper first) for 2 minutes and let it stand for 3 minutes."
   },
   {
-    question: "Who prepares the recipes and cooks the meals?",
-    answer: "Our recipes are curated by traditional family home-makers (mothers) using non-industrial, honest processes. The ingredients are cooked in small hygienic batches styled exactly like a traditional Indian home kitchen, before they undergo gentle vacuum-drying."
+    question: "Who designs and prepares the culinary recipes?",
+    answer: "Our recipes are crafted by culinary artisans preserving legacy regional recipes. Each batch is slowly prepared in meticulously sanitised, small-scale kitchens using clean-label techniques before undergoing high-vacuum, sub-zero drying to retain maximum flavor profiles."
   },
   {
-    question: "What is special about the Toddlers' Food category?",
-    answer: "Our Toddler range consists of 100% natural, mild dishes (Bina mirchi ka khaana). They are prepared with zero green/red chillies or complex spices, ensuring sweet/savory nourishment that young tummies can easily digest during travels or long transits."
+    question: "What makes the Toddlers' Food range unique?",
+    answer: "Our Toddler collection is formulated with pure, child-safe ingredients and zero added sugar, artificial thickeners, or preservatives. Free from green/red chillies and complex spices, these gentle recipes ensure high-digestibility and clean-label micro-nutrition during travels."
   }
 ];

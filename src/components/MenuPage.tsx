@@ -3,7 +3,7 @@
 import { useState, useMemo, useContext } from 'react';
 import { 
   Plus, Minus, ShoppingBag, Star, Clock, 
-  ChevronDown, Search, Filter, Leaf 
+  ChevronDown, Search, Filter, Leaf, X
 } from 'lucide-react';
 import { Product } from '../types';
 import { AppContext } from './ClientLayout';
@@ -64,18 +64,33 @@ export default function MenuPage({
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           
           {/* Live search input field */}
-          <div className="relative flex-1 max-w-md">
-            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <Search className="w-5 h-5" />
-            </span>
-            <input 
-              type="text"
-              placeholder="Search recipes (e.g. Khichdi, Poha, Toddler...)"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-warm-cream border border-warm-soft rounded-2xl text-xs font-semibold focus:outline-none focus:border-navy text-navy placeholder:text-slate-400 shadow-xs"
-              id="menu_search_box"
-            />
+          <div className="relative flex-1 max-w-md flex items-center gap-2">
+            <div className="relative flex-1">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <Search className="w-5 h-5" />
+              </span>
+              <input 
+                type="text"
+                placeholder="Search recipes (e.g. Khichdi, Poha, Toddler...)"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-11 pr-10 py-3 bg-warm-cream border border-warm-soft rounded-2xl text-xs font-semibold focus:outline-none focus:border-navy text-navy placeholder:text-slate-400 shadow-xs"
+                id="menu_search_box"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-navy cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+            {searchQuery && (
+              <span className="text-[10px] text-slate-500 font-black uppercase tracking-wider shrink-0 bg-slate-100 p-2 rounded-xl border border-slate-200">
+                {filteredProducts.length} Matches
+              </span>
+            )}
           </div>
 
           <div className="flex items-center gap-2 text-xs font-black text-slate-400 uppercase tracking-wider">

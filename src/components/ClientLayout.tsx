@@ -5,11 +5,13 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import CartDrawer from './CartDrawer';
 import { Product, CartItem } from '../types';
+import { PRODUCTS_DATA } from '../productsData';
 
 interface AppContextType {
   handleAddToCart: (product: Product, qty?: number) => void;
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
+  handleAddTravelBundle: (days: number, mealsPerDay: number, profile: 'mild' | 'regular' | 'spicy') => void;
 }
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -54,6 +56,50 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
       }
       return [...prev, { product, quantity: qty }];
     });
+    setCheckoutStep('cart');
+    setIsCartOpen(true);
+  };
+  
+  const handleAddTravelBundle = (days: number, mealsPerDay: number, profile: 'mild' | 'regular' | 'spicy') => {
+    const totalMeals = days * mealsPerDay;
+    
+    // Select main dishes: exclude Achars and Snacks
+    const mainDishes = PRODUCTS_DATA.filter(p => p.category !== 'Achars' && p.category !== 'Snacks');
+    
+    // Map profile to Spicy levels
+    const spicyLevel = profile === 'mild' ? 'Mild' : (profile === 'spicy' ? 'Spicy' : 'Medium');
+    
+    let candidates = mainDishes.filter(p => p.isSpicy === spicyLevel);
+    if (candidates.length === 0) {
+      candidates = mainDishes;
+    }
+    
+    // Add to cart distributed
+    const newItems: CartItem[] = [];
+    for (let i = 0; i < totalMeals; i++) {
+      const product = candidates[i % candidates.length];
+      const existing = newItems.find(item => item.product.id === product.id);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        newItems.push({ product, quantity: 1 });
+      }
+    }
+    
+    // Merge newItems into cart
+    setCart(prev => {
+      const next = [...prev];
+      newItems.forEach(newItem => {
+        const idx = next.findIndex(item => item.product.id === newItem.product.id);
+        if (idx > -1) {
+          next[idx] = { ...next[idx], quantity: next[idx].quantity + newItem.quantity };
+        } else {
+          next.push(newItem);
+        }
+      });
+      return next;
+    });
+    
     setCheckoutStep('cart');
     setIsCartOpen(true);
   };
@@ -125,7 +171,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   };
 
   return (
-    <AppContext.Provider value={{ handleAddToCart, selectedCategory, setSelectedCategory }}>
+    <AppContext.Provider value={{ handleAddToCart, selectedCategory, setSelectedCategory, handleAddTravelBundle }}>
       <div className="min-h-screen bg-warm-cream text-navy font-sans relative" id="app_root">
         <Navbar 
           totalCartItems={totalCartItems}

@@ -24,6 +24,7 @@ export default function Navbar({
     { id: 'home', path: '/', label: 'Home' },
     { id: 'about-us', path: '/about', label: 'About Us' },
     { id: 'menu', path: '/products', label: 'Our Menu' },
+    { id: 'travel-planner', path: '/travel-planner', label: 'Travel Planner' },
     { id: 'contact-us', path: '/contact', label: 'Contact Us' }
   ];
 

@@ -268,6 +268,8 @@ export default function CartDrawer({
                   <input 
                     type="tel" 
                     required
+                    pattern="[0-9+ \-]{10,15}"
+                    title="Please enter a valid 10-15 digit phone number"
                     placeholder="+91 99999 88888"
                     value={shippingDetails.phone}
                     onChange={(e) => setShippingDetails({ ...shippingDetails, phone: e.target.value })}
@@ -304,6 +306,8 @@ export default function CartDrawer({
                     <input 
                       type="text" 
                       required
+                      pattern="[0-9a-zA-Z\- ]{4,10}"
+                      title="Please enter a valid postal code (4-10 alphanumeric characters)"
                       placeholder="400076"
                       value={shippingDetails.zip}
                       onChange={(e) => setShippingDetails({ ...shippingDetails, zip: e.target.value })}
@@ -376,7 +380,7 @@ export default function CartDrawer({
                 </div>
 
                 {/* WhatsApp Dispatch Success Banner Alert */}
-                <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4.5 space-y-2.5 text-center shadow-xs" id="whatsapp_dispatch_success_toast">
+                <div className="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4.5 space-y-3.5 text-center shadow-xs" id="whatsapp_dispatch_success_toast">
                   <div className="flex items-center justify-center gap-1.5 text-emerald-800 font-black text-xs uppercase tracking-wider">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping inline-block" />
                     💬 Dispatch Confirmed!
@@ -384,6 +388,16 @@ export default function CartDrawer({
                   <p className="text-[11.5px] text-emerald-700 font-bold leading-relaxed">
                     A WhatsApp message containing all of your customer details, quantities, and the exact total of <span className="font-black text-navy">₹{(completedOrderTotal || cartGrandTotal).toFixed(2)}</span> has been automatically prepared and sent to Milli (<span className="font-extrabold underline decoration-emerald-500/20">+91 9311501426</span>).
                   </p>
+                  {whatsappShareUrl && (
+                    <a 
+                      href={whatsappShareUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md w-full cursor-pointer"
+                    >
+                      💬 If WhatsApp did not open, click here
+                    </a>
+                  )}
                 </div>
 
                 {/* Receipt Card */}

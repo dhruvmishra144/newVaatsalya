@@ -41,6 +41,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/travel-planner" className="hover:text-accent-orange cursor-pointer">
+                Travel Suitcase Planner
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="hover:text-accent-orange cursor-pointer">
                 Contact Us
               </Link>
