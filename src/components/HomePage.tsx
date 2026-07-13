@@ -3,7 +3,7 @@
 import { 
   ArrowRight, Shield, Scale, Clock, Star, 
   Globe, Sparkles, Smile, ArrowUpRight,
-  TrendingUp, Compass, Baby
+  TrendingUp, Compass, Baby, Leaf
 } from 'lucide-react';
 import { useContext } from 'react';
 import Link from 'next/link';
@@ -371,7 +371,7 @@ export default function HomePage({
                 className="bg-white rounded-3xl border border-warm-soft overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Image Section */}
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-44 overflow-hidden">
                   <img 
                     src={product.imageUrl} 
                     alt={product.name} 
@@ -384,19 +384,14 @@ export default function HomePage({
                     {product.chefTag}
                   </span>
 
-                  <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm p-1 px-2 rounded-lg flex items-center gap-1 shadow-xs text-[9px] font-black">
-                    <span className={`w-1.5 h-1.5 rounded-full ${product.isVeg ? 'bg-green-500' : 'bg-red-500'}`}></span>
-                    {product.isVeg ? 'Veg Only' : 'Non-Veg'}
+                  <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-xl flex items-center gap-1 shadow-sm text-[9px] font-black uppercase tracking-wider text-[#B48A30] border border-[#FFB500]/20">
+                    <Leaf className="w-3 h-3 text-[#FFB500] fill-[#FFB500]" />
+                    <span>Pure Veg</span>
                   </span>
 
                   <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm p-1.5 px-2.5 rounded-lg flex items-center gap-1 shadow-xs text-[10px] font-black text-slate-600">
                     <Clock className="w-3.5 h-3.5 text-navy" />
                     <span>{product.prepTime}</span>
-                  </div>
-
-                  <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-sm p-1 px-2.5 rounded-lg flex items-center gap-1 shadow-xs text-[10px] font-black text-slate-700">
-                    <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                    <span>{product.rating}</span>
                   </div>
                 </div>
 
@@ -406,7 +401,17 @@ export default function HomePage({
                     <span className="text-[9px] uppercase font-black text-navy/80">
                       {product.category} • Dry {product.weight}g
                     </span>
-                    <h3 className="font-serif font-black text-lg text-navy leading-snug group-hover:text-navy/85 transition-colors">
+                    
+                    {/* Social proof placement right under metadata */}
+                    <div className="flex items-center gap-1.5 pt-0.5">
+                      <div className="flex items-center gap-0.5 text-amber-500">
+                        <Star className="w-3 h-3 fill-amber-500 text-amber-500" />
+                      </div>
+                      <span className="text-xs font-black text-navy">{product.rating}</span>
+                      <span className="text-[10px] text-slate-400 font-bold">({product.reviews} reviews)</span>
+                    </div>
+
+                    <h3 className="font-serif font-black text-lg text-navy leading-snug group-hover:text-navy/85 transition-colors pt-1">
                       {product.name}
                     </h3>
                     <p className="text-xs text-emerald-700 font-serif font-bold italic">
@@ -419,7 +424,7 @@ export default function HomePage({
 
                   <div className="flex items-center justify-between border-t border-warm-soft pt-4">
                     <div>
-                      <span className="text-[10px] text-slate-400 uppercase font-black block">Pouch price</span>
+                      <span className="text-[10px] text-slate-400 uppercase font-black block">Price</span>
                       <span className="text-lg font-black text-navy">₹{product.price}</span>
                     </div>
                     <button

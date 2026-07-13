@@ -4,7 +4,7 @@ import { Product, FAQ } from './types';
 const RAW_PRODUCTS_LIST = [
   // --- Category: Gourmet Curries ---
   { id: 'gc-palak-paneer', name: 'Palak Paneer', hindiName: 'पालक पनीर', category: 'Gourmet Curries', price: 300, isSpicy: 'Medium' as const },
-  { id: 'gc-kadhi-paneer', name: 'Kadhi Paneer', hindiName: 'कढ़ी पनीर', category: 'Gourmet Curries', price: 300, isSpicy: 'Medium' as const },
+  { id: 'gc-kadhi-paneer', name: 'Kadhai Paneer', hindiName: 'कढ़ाई पनीर', category: 'Gourmet Curries', price: 300, isSpicy: 'Medium' as const },
   { id: 'gc-shahi-paneer', name: 'Shahi Paneer', hindiName: 'शाही पनीर', category: 'Gourmet Curries', price: 300, isSpicy: 'Mild' as const },
   { id: 'gc-aloo-matar', name: 'Aloo Matar', hindiName: 'आलू मटर', category: 'Gourmet Curries', price: 250, isSpicy: 'Medium' as const },
   { id: 'gc-gobhi-matar', name: 'Gobhi Matar', hindiName: 'गोभी मटर', category: 'Gourmet Curries', price: 250, isSpicy: 'Medium' as const },
@@ -207,7 +207,7 @@ const constructProduct = (raw: typeof RAW_PRODUCTS_LIST[number], index: number):
     "Gobhi_Matar Medium.jpeg",
     "Jeera_Rice Medium.jpeg",
     "Kadhi Medium.jpeg",
-    "Kadhi_Paneer Medium.jpeg",
+    "Kadhai_Paneer Medium.jpeg",
     "Kadhi_Rice Medium.jpeg",
     "Kale_Channe Medium.jpeg",
     "Malai_Kofta Medium.jpeg",
@@ -297,20 +297,22 @@ const constructProduct = (raw: typeof RAW_PRODUCTS_LIST[number], index: number):
   }
 
   // Create highly rich description that honors categories
-  let description = `${raw.name} prepared lovingly with home-style touch. Free of raw chemicals and preservatives.`;
+  // Create highly rich description that honors categories
+  let description = `Chef-Curated ${raw.name}. Vacuum-compressed at peak freshness. Zero preservatives, 100% gourmet texture.`;
   if (raw.category === "Toddlers' Food") {
-    description = `Bina mirchi ka khaana. Mildly spiced, soft, highly digestible and kid-approved recipe. Safe for toddlers' micro-nutrition.`;
+    description = `Premium child-safe recipe. Zero chillies, mildly spiced, highly digestible, and micro-nutrient rich. 100% pure.`;
   } else if (raw.category === 'Ready To Cook') {
-    description = `100% homestyle dehydrated preparation. Extremely lightweight, dried with Zero preservatives, shelf life of 6 months. Travel-ready.`;
+    description = `Chef-Curated ${raw.name} (Ready To Cook). Vacuum-compressed at peak freshness. Zero preservatives, 100% gourmet texture.`;
   } else if (raw.category === 'Ready To Eat') {
-    description = `Soft & fresh breads. Dip packet in warm water for a few minutes to restore its freshly baked motherly feel immediately.`;
+    description = `Artisanal breads. Thermally sealed at peak softness. Restore instantly with a warm-water dip or toast.`;
   } else if (raw.category === 'Snacks') {
-    description = `The ultimate, crunchy afternoon teatime accompaniment. Handcrafted, low salt, zero cholesterol fats.`;
+    description = `Elite snack selection. Slow-roasted in small batches. Low-sodium, heart-healthy fats, zero trans fats.`;
   } else if (raw.category === 'Jain food') {
-    description = `Prepared strictly under absolute Satvik guidelines. 100% free of onions, garlic, potatoes, or ground-roots.`;
+    description = `Satvik-Certified. Crafted strictly without root vegetables, onion, or garlic. 100% gourmet purity.`;
   } else if (raw.category === 'Achars') {
-    description = `Premium aged traditional pickles cured carefully starting @380 per Kg. Tangy, zesty, and perfect for every meal.`;
+    description = `Aged heritage pickles. Cured in cold-pressed mustard oil with hand-ground spices. Premium tang.`;
   }
+
 
   const isVeg = true; // All Vaatsalya recipes are 100% vegetarian
 
