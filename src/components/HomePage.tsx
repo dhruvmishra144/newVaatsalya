@@ -371,27 +371,29 @@ export default function HomePage({
                 className="bg-white rounded-3xl border border-warm-soft overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Image Section */}
-                <div className="relative h-44 overflow-hidden">
-                  <img 
-                    src={product.imageUrl} 
-                    alt={product.name} 
-                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 select-none"
-                    referrerPolicy="no-referrer"
-                  />
-                  
-                  {/* Category marker */}
-                  <span className="absolute top-3 left-3 bg-navy text-white text-[9px] font-black uppercase tracking-wider px-2.5 py-1.5 rounded-lg shadow-xs">
-                    {product.chefTag}
-                  </span>
+                <div className="p-4 pb-0">
+                  <div className="relative h-32 rounded-2xl overflow-hidden bg-[#FAF8F5] border border-warm-soft">
+                    <img 
+                      src={product.imageUrl} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 select-none"
+                      referrerPolicy="no-referrer"
+                    />
+                    
+                    {/* Category marker */}
+                    <span className="absolute top-2.5 left-2.5 bg-navy text-white text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md shadow-xs">
+                      {product.chefTag}
+                    </span>
 
-                  <span className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-xl flex items-center gap-1 shadow-sm text-[9px] font-black uppercase tracking-wider text-[#B48A30] border border-[#FFB500]/20">
-                    <Leaf className="w-3 h-3 text-[#FFB500] fill-[#FFB500]" />
-                    <span>Pure Veg</span>
-                  </span>
+                    <span className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm text-[8px] font-black uppercase tracking-wider text-[#B48A30] border border-[#FFB500]/20">
+                      <Leaf className="w-2.5 h-2.5 text-[#FFB500] fill-[#FFB500]" />
+                      <span>Pure Veg</span>
+                    </span>
 
-                  <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm p-1.5 px-2.5 rounded-lg flex items-center gap-1 shadow-xs text-[10px] font-black text-slate-600">
-                    <Clock className="w-3.5 h-3.5 text-navy" />
-                    <span>{product.prepTime}</span>
+                    <div className="absolute bottom-2.5 left-2.5 bg-white/95 backdrop-blur-sm p-1.5 px-2 rounded-md flex items-center gap-1 shadow-xs text-[9px] font-black text-slate-600">
+                      <Clock className="w-3 h-3 text-navy" />
+                      <span>{product.prepTime}</span>
+                    </div>
                   </div>
                 </div>
 
