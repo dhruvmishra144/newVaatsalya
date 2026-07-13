@@ -186,32 +186,114 @@ const constructProduct = (raw: typeof RAW_PRODUCTS_LIST[number], index: number):
     prepTime = '4 Mins (No Onion/Garlic)';
   }
 
-  // Choose highly aesthetic food Unsplash photos matching the ingredient/name keywords
-  let imageUrl = "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80"; // Dal / Khichdi fallback
+  // List of all local files available in public/assets/images/
+  const localImages = [
+    "Achari_Gobhi Medium.jpeg",
+    "Aloo_Gobhi Medium.jpeg",
+    "Aloo_Matar Medium.jpeg",
+    "Bhindi Medium.jpeg",
+    "Biryani Medium.jpeg",
+    "Chaap Medium.jpeg",
+    "Chole Medium.jpeg",
+    "Chowmein Medium.jpeg",
+    "Daal_Bukhara Medium.jpeg",
+    "Dal_Makhani Medium.jpeg",
+    "Dal_Tadka Medium.jpeg",
+    "Dhaaba_Daal__black_ Medium.jpeg",
+    "Dry_Channa_Dal Medium.jpeg",
+    "Fried_Rice Medium.jpeg",
+    "Gajar_Halwa Medium.jpeg",
+    "Gatta_Rajasthani Medium.jpeg",
+    "Gobhi_Matar Medium.jpeg",
+    "Jeera_Rice Medium.jpeg",
+    "Kadhi Medium.jpeg",
+    "Kadhi_Paneer Medium.jpeg",
+    "Kadhi_Rice Medium.jpeg",
+    "Kale_Channe Medium.jpeg",
+    "Malai_Kofta Medium.jpeg",
+    "Masala_Tadka Medium.jpeg",
+    "Masoor_Dal Medium.jpeg",
+    "Matar Medium.jpeg",
+    "Matar_Paneer Medium.jpeg",
+    "Matra Medium.jpeg",
+    "Paneer_Bhurji Medium.jpeg",
+    "Pao_bhaji Medium.jpeg",
+    "Pasta Medium.jpeg",
+    "Pasta_Mix___Italian Medium.jpeg",
+    "Pav_Bhaji Medium.jpeg",
+    "Poha Medium.jpeg",
+    "Pulao Medium.jpeg",
+    "Rajma Medium.jpeg",
+    "Rajma_Rice Medium.jpeg",
+    "Rice Medium.jpeg",
+    "Saag Medium.jpeg",
+    "Sambhar Medium.jpeg",
+    "Shahi_Gravy__without_paneer_ Medium.jpeg",
+    "Shahi_Paneer Medium.jpeg",
+    "Soya_nutri Medium.jpeg",
+    "Suji_Halwa Medium.jpeg",
+    "Toddler_Chole Medium.jpeg",
+    "Toddler_Dal_Makhani Medium.jpeg",
+    "Toddler_Dalia Medium.jpeg",
+    "Toddler_Khichidi Medium.jpeg",
+    "Toddler_Palak_Paneer Medium.jpeg",
+    "Toddler_Pav_Bhaji Medium.jpeg",
+    "Toddler_Rajma Medium.jpeg",
+    "Toddler_Shahi_Paneer Medium.jpeg",
+    "Upma Medium.jpeg",
+    "Vegetable_Bambino Medium.jpeg",
+    "Yellow_Moong_Daal Medium.jpeg"
+  ];
+
+  // Try to find a match
   const lowerName = raw.name.toLowerCase();
   
-  if (lowerName.includes('paneer')) {
-    imageUrl = "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&auto=format&fit=crop&q=80"; // Palak / Shahi paneer
-  } else if (lowerName.includes('poha')) {
-    imageUrl = "https://images.unsplash.com/photo-1605851868183-7a4cb5c798fc?w=600&auto=format&fit=crop&q=80"; // Beautiful poha breakfast
-  } else if (lowerName.includes('upma')) {
-    imageUrl = "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=600&auto=format&fit=crop&q=80"; // Upma
-  } else if (lowerName.includes('achar') || lowerName.includes('chutney')) {
-    imageUrl = "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=600&auto=format&fit=crop&q=80"; // Indian Pickle / Achar jars
-  } else if (lowerName.includes('halwa') || lowerName.includes('sweet')) {
-    imageUrl = "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&auto=format&fit=crop&q=80"; // Warm Gajar Halwa / Sheera
-  } else if (lowerName.includes('thepla') || lowerName.includes('paratha') || lowerName.includes('chapati') || lowerName.includes('naan') || lowerName.includes('roti') || lowerName.includes('poori') || lowerName.includes('bhatura')) {
-    imageUrl = "https://images.unsplash.com/photo-1626515827012-abaa3a37ecb6?w=600&auto=format&fit=crop&q=80"; // Flatbreads / Roti
-  } else if (lowerName.includes('samosa') || lowerName.includes('makhana') || lowerName.includes('chips') || lowerName.includes('matthi') || lowerName.includes('khasta')) {
-    imageUrl = "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=600&auto=format&fit=crop&q=80"; // Crispy mathri / crunchies
-  } else if (lowerName.includes('rice') || lowerName.includes('pulao') || lowerName.includes('biryani')) {
-    imageUrl = "https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?w=600&auto=format&fit=crop&q=80"; // Fragrant rice / Pulao
-  } else if (lowerName.includes('chole') || lowerName.includes('rajma') || lowerName.includes('bukhara')) {
-    imageUrl = "https://images.unsplash.com/photo-1601050691585-6b7978aeeb50?w=600&auto=format&fit=crop&q=80"; // Kidney beans / Chickpeas
-  } else if (lowerName.includes('pasta') || lowerName.includes('bambino') || lowerName.includes('chowmein')) {
-    imageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80"; // Delicious Noodles & Pasta
-  } else if (lowerName.includes('bhindi') || lowerName.includes('gobhi') || lowerName.includes('veg') || lowerName.includes('matar')) {
-    imageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80"; // Mixed veg / cooked dishes
+  // Helper to normalize strings for comparison (remove spaces, parentheses, etc)
+  const normalize = (str: string) => str.replace(/[^a-z0-9]/gi, '').toLowerCase();
+
+  const normalizedName = normalize(lowerName.replace(/\(.*\)/g, '').trim()); // Remove things like (Jain), (RTC), (1 Kg)
+  
+  const matchedFile = localImages.find(fileName => {
+    const cleanFileName = fileName.replace(/\s*Medium\.jpeg/i, '');
+    const normalizedFile = normalize(cleanFileName);
+    return normalizedName === normalizedFile;
+  }) || localImages.find(fileName => {
+    const cleanFileName = fileName.replace(/\s*Medium\.jpeg/i, '');
+    const normalizedFile = normalize(cleanFileName);
+    return normalizedName.includes(normalizedFile) || normalizedFile.includes(normalizedName);
+  });
+
+  let imageUrl = "";
+  if (matchedFile) {
+    imageUrl = `/assets/images/${encodeURIComponent(matchedFile)}`;
+  } else {
+    // Choose highly aesthetic food Unsplash photos matching the ingredient/name keywords
+    imageUrl = "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80"; // Dal / Khichdi fallback
+    const lowerName = raw.name.toLowerCase();
+    
+    if (lowerName.includes('paneer')) {
+      imageUrl = "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&auto=format&fit=crop&q=80"; // Palak / Shahi paneer
+    } else if (lowerName.includes('poha')) {
+      imageUrl = "https://images.unsplash.com/photo-1605851868183-7a4cb5c798fc?w=600&auto=format&fit=crop&q=80"; // Beautiful poha breakfast
+    } else if (lowerName.includes('upma')) {
+      imageUrl = "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=600&auto=format&fit=crop&q=80"; // Upma
+    } else if (lowerName.includes('achar') || lowerName.includes('chutney')) {
+      imageUrl = "https://images.unsplash.com/photo-1621263764928-df1444c5e859?w=600&auto=format&fit=crop&q=80"; // Indian Pickle / Achar jars
+    } else if (lowerName.includes('halwa') || lowerName.includes('sweet')) {
+      imageUrl = "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&auto=format&fit=crop&q=80"; // Warm Gajar Halwa / Sheera
+    } else if (lowerName.includes('thepla') || lowerName.includes('paratha') || lowerName.includes('chapati') || lowerName.includes('naan') || lowerName.includes('roti') || lowerName.includes('poori') || lowerName.includes('bhatura')) {
+      imageUrl = "https://images.unsplash.com/photo-1626515827012-abaa3a37ecb6?w=600&auto=format&fit=crop&q=80"; // Flatbreads / Roti
+    } else if (lowerName.includes('samosa') || lowerName.includes('makhana') || lowerName.includes('chips') || lowerName.includes('matthi') || lowerName.includes('khasta')) {
+      imageUrl = "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=600&auto=format&fit=crop&q=80"; // Crispy mathri / crunchies
+    } else if (lowerName.includes('rice') || lowerName.includes('pulao') || lowerName.includes('biryani')) {
+      imageUrl = "https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?w=600&auto=format&fit=crop&q=80"; // Fragrant rice / Pulao
+    } else if (lowerName.includes('chole') || lowerName.includes('rajma') || lowerName.includes('bukhara')) {
+      imageUrl = "https://images.unsplash.com/photo-1601050691585-6b7978aeeb50?w=600&auto=format&fit=crop&q=80"; // Kidney beans / Chickpeas
+    } else if (lowerName.includes('pasta') || lowerName.includes('bambino') || lowerName.includes('chowmein')) {
+      imageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80"; // Delicious Noodles & Pasta
+    } else if (lowerName.includes('bhindi') || lowerName.includes('gobhi') || lowerName.includes('veg') || lowerName.includes('matar')) {
+      imageUrl = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format&fit=crop&q=80"; // Mixed veg / cooked dishes
+    }
   }
 
   // Create highly rich description that honors categories
