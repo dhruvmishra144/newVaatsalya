@@ -371,8 +371,8 @@ export default function HomePage({
                 className="bg-white rounded-3xl border border-warm-soft overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Image Section */}
-                <div className="p-4 pb-0">
-                  <div className="relative h-32 rounded-2xl overflow-hidden bg-[#FAF8F5] border border-warm-soft">
+                <div className="pt-5 flex justify-center">
+                  <div className="relative w-40 h-40 rounded-2xl overflow-hidden bg-[#FAF8F5] border border-warm-soft shadow-xs">
                     <img 
                       src={product.imageUrl} 
                       alt={product.name} 
@@ -381,16 +381,15 @@ export default function HomePage({
                     />
                     
                     {/* Category marker */}
-                    <span className="absolute top-2.5 left-2.5 bg-navy text-white text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md shadow-xs">
+                    <span className="absolute top-2 left-2 bg-navy text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
                       {product.chefTag}
                     </span>
 
-                    <span className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm text-[8px] font-black uppercase tracking-wider text-[#B48A30] border border-[#FFB500]/20">
+                    <span className="absolute top-2 right-2 bg-white/95 backdrop-blur-sm p-1 rounded-md flex items-center gap-0.5 shadow-sm text-[8px] font-black uppercase tracking-wider text-[#B48A30] border border-[#FFB500]/20">
                       <Leaf className="w-2.5 h-2.5 text-[#FFB500] fill-[#FFB500]" />
-                      <span>Pure Veg</span>
                     </span>
 
-                    <div className="absolute bottom-2.5 left-2.5 bg-white/95 backdrop-blur-sm p-1.5 px-2 rounded-md flex items-center gap-1 shadow-xs text-[9px] font-black text-slate-600">
+                    <div className="absolute bottom-2 left-2 bg-white/95 backdrop-blur-sm p-1 px-1.5 rounded-md flex items-center gap-1 shadow-xs text-[9px] font-black text-slate-600">
                       <Clock className="w-3 h-3 text-navy" />
                       <span>{product.prepTime}</span>
                     </div>
