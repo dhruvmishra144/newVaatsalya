@@ -30,7 +30,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     address: '',
     city: '',
     zip: '',
-    shippingMethod: 'standard'
+    shippingMethod: 'standard',
+    deliveryDate: ''
   });
   
   const [discountCode, setDiscountCode] = useState<string>('');
@@ -136,9 +137,10 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     // Construct professional, high-impact order text
     const itemsText = cart.map(item => `• *${item.quantity}x* ${item.product.name} (${item.product.weight}g) - ₹${(item.product.price * item.quantity).toFixed(2)}`).join('\n');
     const discountText = appliedDiscount ? `\n- *Discount (${appliedDiscount.code}):* -₹${discountAmount.toFixed(2)}` : '';
-    const deliveryType = shippingDetails.shippingMethod === 'express' ? 'Express Air Link (1-2 days)' : 'Standard ground (3-5 days)';
+    const deliveryType = shippingDetails.shippingMethod === 'express' ? 'Express Air Link (1-2 days)' : 'Standard ground (Scheduled Delivery)';
+    const deliveryDateInfo = shippingDetails.shippingMethod === 'standard' && shippingDetails.deliveryDate ? `\n- *Requested Delivery Date:* ${shippingDetails.deliveryDate} (Porter charges apply)` : '';
     
-    const whatsappMsg = `*🍲 NEW ORDER FROM VAATSALYA FOODS 🍲*\n*Order ID:* ${generatedId}\n\n👤 *CUSTOMER DETAILS:*\n- *Name:* ${shippingDetails.name}\n- *Phone:* ${shippingDetails.phone}\n- *Email:* ${shippingDetails.email}\n- *Address:* ${shippingDetails.address}, ${shippingDetails.city} - ${shippingDetails.zip}\n\n📋 *ORDERED ITEMS:*\n${itemsText}\n\n💰 *PAYMENT SUMMARY:*\n- *Subtotal:* ₹${cartSubtotal.toFixed(2)}${discountText}\n- *Catering Speed Delivery:* ${shippingCost === 0 ? 'FREE Delivery' : '₹' + shippingCost.toFixed(2)}\n- *ESTIMATED TOTAL:* ₹${cartGrandTotal.toFixed(2)}\n\n🚚 *Shipping Method:* ${deliveryType}`;
+    const whatsappMsg = `*🍲 NEW ORDER FROM VAATSALYA FOODS 🍲*\n*Order ID:* ${generatedId}\n\n👤 *CUSTOMER DETAILS:*\n- *Name:* ${shippingDetails.name}\n- *Phone:* ${shippingDetails.phone}\n- *Email:* ${shippingDetails.email}\n- *Address:* ${shippingDetails.address}, ${shippingDetails.city} - ${shippingDetails.zip}\n\n📋 *ORDERED ITEMS:*\n${itemsText}\n\n💰 *PAYMENT SUMMARY:*\n- *Subtotal:* ₹${cartSubtotal.toFixed(2)}${discountText}\n- *Catering Speed Delivery:* ${shippingCost === 0 ? 'FREE Delivery' : '₹' + shippingCost.toFixed(2)}\n- *ESTIMATED TOTAL:* ₹${cartGrandTotal.toFixed(2)}\n\n🚚 *Shipping Method:* ${deliveryType}${deliveryDateInfo}`;
 
     const whatsappUrl = `https://wa.me/919311501426?text=${encodeURIComponent(whatsappMsg)}`;
     setWhatsappShareUrl(whatsappUrl);

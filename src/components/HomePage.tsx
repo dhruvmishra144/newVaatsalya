@@ -84,9 +84,8 @@ export default function HomePage({
               </div>
               
               <h1 className="text-4xl sm:text-6xl font-serif font-black text-navy leading-tight">
-                Moms' Cooked <br/>
                 <span className="text-navy relative inline-block">
-                  Indian Foods
+                  Mom's Cooked Food
                   <svg className="absolute bottom-[-6px] left-0 w-full h-2 text-accent-orange/70" viewBox="0 0 100 10" preserveAspectRatio="none">
                     <path d="M0 6 Q 50 1, 100 6" stroke="currentColor" strokeWidth="4" fill="none" />
                   </svg>

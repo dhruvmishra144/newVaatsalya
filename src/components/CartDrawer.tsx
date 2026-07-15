@@ -21,6 +21,7 @@ interface CartDrawerProps {
     city: string;
     zip: string;
     shippingMethod: string;
+    deliveryDate: string;
   };
   setShippingDetails: React.Dispatch<React.SetStateAction<{
     name: string;
@@ -30,6 +31,7 @@ interface CartDrawerProps {
     city: string;
     zip: string;
     shippingMethod: string;
+    deliveryDate: string;
   }>>;
   discountCode: string;
   setDiscountCode: (code: string) => void;
@@ -329,7 +331,7 @@ export default function CartDrawer({
                       }`}
                     >
                       <span className="font-extrabold block text-xs">Standard ground</span>
-                      <span className="text-[10px] text-slate-400 block mt-0.5">{cartSubtotal >= 1000 ? 'FREE' : '₹50'} • 3-5 days</span>
+                      <span className="text-[10px] text-slate-400 block mt-0.5">{cartSubtotal >= 1000 ? 'FREE' : '₹50'} • Select Date</span>
                     </button>
                     <button
                       type="button"
@@ -345,6 +347,25 @@ export default function CartDrawer({
                     </button>
                   </div>
                 </div>
+
+                {shippingDetails.shippingMethod === 'standard' && (
+                  <div className="space-y-1.5 animate-fade-in">
+                    <label className="text-slate-500 block font-bold" htmlFor="delivery_date">Delivery Date *</label>
+                    <input
+                      id="delivery_date"
+                      type="date"
+                      required
+                      min={new Date().toISOString().split('T')[0]}
+                      value={shippingDetails.deliveryDate || ''}
+                      onChange={(e) => setShippingDetails({ ...shippingDetails, deliveryDate: e.target.value })}
+                      className="w-full border-2 border-warm-soft p-3 rounded-xl focus:outline-none focus:border-navy text-xs font-semibold"
+                    />
+                    <div className="p-3 bg-amber-50/50 border border-amber-200/50 rounded-xl text-[10px] font-black text-amber-800 flex items-center gap-1.5 mt-1">
+                      <span className="text-xs">⚠️</span>
+                      <span>Porter charges apply.</span>
+                    </div>
+                  </div>
+                )}
 
                 {/* Secret Submit trigger */}
                 <button type="submit" id="simulated_checkout_submit" className="hidden" />
