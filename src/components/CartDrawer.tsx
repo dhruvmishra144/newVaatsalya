@@ -93,6 +93,14 @@ export default function CartDrawer({
     return cart.reduce((total, item) => total + item.quantity, 0);
   }, [cart]);
 
+  const localTodayDate = useMemo(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }, []);
+
   // Apply visual coupon codes
   const handleApplyCoupon = (e: React.FormEvent) => {
     e.preventDefault();
@@ -324,7 +332,7 @@ export default function CartDrawer({
                     id="delivery_date"
                     type="date"
                     required
-                    min={new Date().toISOString().split('T')[0]}
+                    min={localTodayDate}
                     value={shippingDetails.deliveryDate || ''}
                     onChange={(e) => setShippingDetails({ ...shippingDetails, deliveryDate: e.target.value })}
                     className="w-full border-2 border-warm-soft p-3 rounded-xl focus:outline-none focus:border-navy text-xs font-semibold"

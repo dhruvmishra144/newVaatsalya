@@ -127,6 +127,22 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const handleSimulatedSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Check if selected delivery date is in the past (local timezone)
+    if (shippingDetails.deliveryDate) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Parse the YYYY-MM-DD input date as local date
+      const [year, month, day] = shippingDetails.deliveryDate.split('-').map(Number);
+      const selectedDate = new Date(year, month - 1, day);
+      selectedDate.setHours(0, 0, 0, 0);
+
+      if (selectedDate < today) {
+        alert("Please select today or a future date for delivery.");
+        return;
+      }
+    }
+    
     // Calculate final pricing parameters before cart gets emptied
     const cartSubtotal = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
     const discountAmount = appliedDiscount ? (cartSubtotal * appliedDiscount.percent) / 100 : 0;
