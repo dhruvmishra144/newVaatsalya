@@ -164,6 +164,8 @@ const constructProduct = (raw: typeof RAW_PRODUCTS_LIST[number], index: number):
   let makesWeight = 350;
   let prepTime = '5 Mins';
   
+  const lowerName = raw.name.toLowerCase();
+  
   if (raw.category === 'Ready To Eat') {
     weight = 155;
     makesWeight = 155;
@@ -176,14 +178,70 @@ const constructProduct = (raw: typeof RAW_PRODUCTS_LIST[number], index: number):
     weight = 1000; // 1 Kg
     makesWeight = 1000;
     prepTime = 'Ready To Eat';
-  } else if (raw.category === "Toddlers' Food") {
-    weight = 80;
-    makesWeight = 280;
-    prepTime = '3 Mins (No Chillies)';
-  } else if (raw.category === 'Jain food') {
-    weight = 110;
-    makesWeight = 380;
-    prepTime = '4 Mins (No Onion/Garlic)';
+  } else {
+    // For Gourmet Curries, Ready To Cook, Toddlers' Food, Jain food
+    // Apply name-based rules:
+    
+    // Rice ,Pulao, biryani, kadhi rich, rajma rice 125gm
+    if (
+      lowerName.includes('rice') || 
+      lowerName.includes('pulao') || 
+      lowerName.includes('biryani')
+    ) {
+      weight = 125;
+    }
+    // Upma, poha ,bambino 100 gm
+    else if (
+      lowerName.includes('upma') || 
+      lowerName.includes('poha') || 
+      lowerName.includes('bambino')
+    ) {
+      weight = 100;
+    }
+    // All vegetables and dal 70 gm
+    else if (
+      lowerName.includes('dal') || 
+      lowerName.includes('daal') || 
+      lowerName.includes('sambhar') ||
+      lowerName.includes('paneer') || 
+      lowerName.includes('matar') || 
+      lowerName.includes('gobhi') || 
+      lowerName.includes('bhindi') || 
+      lowerName.includes('aloo') || 
+      lowerName.includes('chole') || 
+      lowerName.includes('rajma') || 
+      lowerName.includes('chaap') || 
+      lowerName.includes('gatta') || 
+      lowerName.includes('kofta') || 
+      lowerName.includes('saag') || 
+      lowerName.includes('pav bhaji') || 
+      lowerName.includes('pao bhaji') || 
+      lowerName.includes('gravy') || 
+      lowerName.includes('matra') || 
+      lowerName.includes('kadhi') || 
+      lowerName.includes('soya nutri') ||
+      lowerName.includes('chane') ||
+      lowerName.includes('channe') ||
+      lowerName.includes('veg') ||
+      raw.category === 'Gourmet Curries'
+    ) {
+      weight = 70;
+    }
+    
+    // Default fallback for toddlers' food
+    if (raw.category === "Toddlers' Food" && weight === 100) {
+      weight = 80;
+    }
+    
+    makesWeight = Math.round(weight * 3.5);
+    
+    if (raw.category === "Toddlers' Food") {
+      prepTime = '3 Mins (No Chillies)';
+    } else if (raw.category === 'Jain food') {
+      prepTime = '4 Mins (No Onion/Garlic)';
+    } else {
+      prepTime = '5 Mins';
+    }
   }
 
   // List of all local files available in public/assets/images/
@@ -246,7 +304,6 @@ const constructProduct = (raw: typeof RAW_PRODUCTS_LIST[number], index: number):
   ];
 
   // Try to find a match
-  const lowerName = raw.name.toLowerCase();
   
   // Helper to normalize strings for comparison (remove spaces, parentheses, etc)
   const normalize = (str: string) => str.replace(/[^a-z0-9]/gi, '').toLowerCase();
