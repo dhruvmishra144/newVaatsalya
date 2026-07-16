@@ -130,8 +130,9 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     // Calculate final pricing parameters before cart gets emptied
     const cartSubtotal = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
     const discountAmount = appliedDiscount ? (cartSubtotal * appliedDiscount.percent) / 100 : 0;
+    const gstAmount = (cartSubtotal - discountAmount) * 0.05;
     const shippingCost = cartSubtotal === 0 ? 0 : (cartSubtotal >= 1000 ? 0 : (shippingDetails.shippingMethod === 'express' ? 150 : 50));
-    const cartGrandTotal = Math.max(0, cartSubtotal - discountAmount + shippingCost);
+    const cartGrandTotal = Math.max(0, cartSubtotal - discountAmount + gstAmount + shippingCost);
     const generatedId = "VTS-" + Math.floor(100000 + Math.random() * 900000);
     
     // Construct professional, high-impact order text
@@ -140,7 +141,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     const deliveryType = shippingDetails.shippingMethod === 'express' ? 'Express Air Link (1-2 days)' : 'Standard ground (Scheduled Delivery)';
     const deliveryDateInfo = shippingDetails.shippingMethod === 'standard' && shippingDetails.deliveryDate ? `\n- *Requested Delivery Date:* ${shippingDetails.deliveryDate} (Porter charges apply)` : '';
     
-    const whatsappMsg = `*🍲 NEW ORDER FROM VAATSALYA FOODS 🍲*\n*Order ID:* ${generatedId}\n\n👤 *CUSTOMER DETAILS:*\n- *Name:* ${shippingDetails.name}\n- *Phone:* ${shippingDetails.phone}\n- *Email:* ${shippingDetails.email}\n- *Address:* ${shippingDetails.address}, ${shippingDetails.city} - ${shippingDetails.zip}\n\n📋 *ORDERED ITEMS:*\n${itemsText}\n\n💰 *PAYMENT SUMMARY:*\n- *Subtotal:* ₹${cartSubtotal.toFixed(2)}${discountText}\n- *Catering Speed Delivery:* ${shippingCost === 0 ? 'FREE Delivery' : '₹' + shippingCost.toFixed(2)}\n- *ESTIMATED TOTAL:* ₹${cartGrandTotal.toFixed(2)}\n\n🚚 *Shipping Method:* ${deliveryType}${deliveryDateInfo}`;
+    const whatsappMsg = `*🍲 NEW ORDER FROM VAATSALYA FOODS 🍲*\n*Order ID:* ${generatedId}\n\n👤 *CUSTOMER DETAILS:*\n- *Name:* ${shippingDetails.name}\n- *Phone:* ${shippingDetails.phone}\n- *Email:* ${shippingDetails.email}\n- *Address:* ${shippingDetails.address}, ${shippingDetails.city} - ${shippingDetails.zip}\n\n📋 *ORDERED ITEMS:*\n${itemsText}\n\n💰 *PAYMENT SUMMARY:*\n- *Subtotal:* ₹${cartSubtotal.toFixed(2)}${discountText}\n- *GST (5%):* ₹${gstAmount.toFixed(2)}\n- *Catering Speed Delivery:* ${shippingCost === 0 ? 'FREE Delivery' : '₹' + shippingCost.toFixed(2)}\n- *ESTIMATED TOTAL:* ₹${cartGrandTotal.toFixed(2)}\n\n🚚 *Shipping Method:* ${deliveryType}${deliveryDateInfo}`;
 
     const whatsappUrl = `https://wa.me/919311501426?text=${encodeURIComponent(whatsappMsg)}`;
     setWhatsappShareUrl(whatsappUrl);

@@ -85,9 +85,13 @@ export default function CartDrawer({
     return shippingDetails.shippingMethod === 'express' ? 150 : 50;
   }, [cartSubtotal, shippingDetails.shippingMethod]);
 
+  const gstAmount = useMemo(() => {
+    return (cartSubtotal - discountAmount) * 0.05;
+  }, [cartSubtotal, discountAmount]);
+
   const cartGrandTotal = useMemo(() => {
-    return Math.max(0, cartSubtotal - discountAmount + shippingCost);
-  }, [cartSubtotal, discountAmount, shippingCost]);
+    return Math.max(0, cartSubtotal - discountAmount + gstAmount + shippingCost);
+  }, [cartSubtotal, discountAmount, gstAmount, shippingCost]);
 
   const totalCartItems = useMemo(() => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -588,6 +592,10 @@ export default function CartDrawer({
                     <span className="font-black">-₹{discountAmount.toFixed(2)}</span>
                   </div>
                 )}
+                <div className="flex justify-between text-slate-500">
+                  <span>GST (5%):</span>
+                  <span className="text-navy font-black">₹{gstAmount.toFixed(2)}</span>
+                </div>
                 <div className="flex justify-between">
                   <span>Catering Speed Delivery:</span>
                   <span className="text-navy font-black">
