@@ -79,11 +79,7 @@ export default function CartDrawer({
     return (cartSubtotal * appliedDiscount.percent) / 100;
   }, [cartSubtotal, appliedDiscount]);
 
-  const shippingCost = useMemo(() => {
-    if (cartSubtotal === 0) return 0;
-    if (cartSubtotal >= 1000) return 0; // Free shipping above ₹1000
-    return shippingDetails.shippingMethod === 'express' ? 150 : 50;
-  }, [cartSubtotal, shippingDetails.shippingMethod]);
+  const shippingCost = 0;
 
   const gstAmount = useMemo(() => {
     return (cartSubtotal - discountAmount) * 0.05;
@@ -91,7 +87,7 @@ export default function CartDrawer({
 
   const cartGrandTotal = useMemo(() => {
     return Math.max(0, cartSubtotal - discountAmount + gstAmount + shippingCost);
-  }, [cartSubtotal, discountAmount, gstAmount, shippingCost]);
+  }, [cartSubtotal, discountAmount, gstAmount]);
 
   const totalCartItems = useMemo(() => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -322,54 +318,22 @@ export default function CartDrawer({
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <label className="text-slate-500 block font-bold">Shipping Speed Method</label>
-                  <div className="grid grid-cols-2 gap-2.5 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setShippingDetails({ ...shippingDetails, shippingMethod: 'standard' })}
-                      className={`p-3 rounded-xl border-2 text-left transition-all cursor-pointer ${
-                        shippingDetails.shippingMethod === 'standard' 
-                          ? 'border-navy bg-warm-cream text-navy' 
-                          : 'border-slate-200 text-slate-400'
-                      }`}
-                    >
-                      <span className="font-extrabold block text-xs">Standard ground</span>
-                      <span className="text-[10px] text-slate-400 block mt-0.5">{cartSubtotal >= 1000 ? 'FREE' : '₹50'} • Select Date</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setShippingDetails({ ...shippingDetails, shippingMethod: 'express' })}
-                      className={`p-3 rounded-xl border-2 text-left transition-all cursor-pointer ${
-                        shippingDetails.shippingMethod === 'express' 
-                          ? 'border-navy bg-warm-cream text-navy' 
-                          : 'border-slate-200 text-slate-400'
-                      }`}
-                    >
-                      <span className="font-extrabold block text-xs">Express Air Link</span>
-                      <span className="text-[10px] text-slate-400 block mt-0.5">{cartSubtotal >= 1000 ? 'FREE' : '₹150'} • 1-2 days</span>
-                    </button>
+                <div className="space-y-1.5">
+                  <label className="text-slate-500 block font-bold" htmlFor="delivery_date">Delivery Date *</label>
+                  <input
+                    id="delivery_date"
+                    type="date"
+                    required
+                    min={new Date().toISOString().split('T')[0]}
+                    value={shippingDetails.deliveryDate || ''}
+                    onChange={(e) => setShippingDetails({ ...shippingDetails, deliveryDate: e.target.value })}
+                    className="w-full border-2 border-warm-soft p-3 rounded-xl focus:outline-none focus:border-navy text-xs font-semibold"
+                  />
+                  <div className="p-3 bg-amber-50/50 border border-amber-200/50 rounded-xl text-[10px] font-black text-amber-800 flex items-center gap-1.5 mt-1">
+                    <span className="text-xs">⚠️</span>
+                    <span>Porter charges apply which varies based on location.</span>
                   </div>
                 </div>
-
-                {shippingDetails.shippingMethod === 'standard' && (
-                  <div className="space-y-1.5 animate-fade-in">
-                    <label className="text-slate-500 block font-bold" htmlFor="delivery_date">Delivery Date *</label>
-                    <input
-                      id="delivery_date"
-                      type="date"
-                      required
-                      min={new Date().toISOString().split('T')[0]}
-                      value={shippingDetails.deliveryDate || ''}
-                      onChange={(e) => setShippingDetails({ ...shippingDetails, deliveryDate: e.target.value })}
-                      className="w-full border-2 border-warm-soft p-3 rounded-xl focus:outline-none focus:border-navy text-xs font-semibold"
-                    />
-                    <div className="p-3 bg-amber-50/50 border border-amber-200/50 rounded-xl text-[10px] font-black text-amber-800 flex items-center gap-1.5 mt-1">
-                      <span className="text-xs">⚠️</span>
-                      <span>Porter charges apply.</span>
-                    </div>
-                  </div>
-                )}
 
                 {/* Secret Submit trigger */}
                 <button type="submit" id="simulated_checkout_submit" className="hidden" />
@@ -597,9 +561,9 @@ export default function CartDrawer({
                   <span className="text-navy font-black">₹{gstAmount.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Catering Speed Delivery:</span>
-                  <span className="text-navy font-black">
-                    {shippingCost === 0 ? 'FREE Delivery' : `₹${shippingCost.toFixed(2)}`}
+                  <span>Porter charges apply:</span>
+                  <span className="text-navy font-black text-right">
+                    Varies based on location
                   </span>
                 </div>
                 <div className="flex justify-between border-t border-slate-200 pt-2 text-sm font-black text-navy">
